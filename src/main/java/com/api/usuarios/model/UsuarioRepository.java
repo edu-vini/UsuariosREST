@@ -1,5 +1,7 @@
 package com.api.usuarios.model;
 
+import com.api.usuarios.handler.BusinessException;
+import com.api.usuarios.handler.RequiredFieldException;
 import com.api.usuarios.model.Usuario;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,9 @@ import java.util.List;
 @Repository
 public class UsuarioRepository {
     public void save(Usuario usuario){
+        if(usuario.getUsername() == null){
+            throw new RequiredFieldException("username");
+        }
         System.out.printf( "Salvando usuario %s, no sistema... \n", usuario.getUsername() );
     }
 
